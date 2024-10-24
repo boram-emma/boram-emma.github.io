@@ -3,7 +3,7 @@
 # https://jinhoooooou.github.io/making-blog/making-blog-7/
 
 main:
-  - tilte: "Home"
+  - title: "Home"
     url: https://boram-emma.github.io
   - title: "About"
     url: /about/
