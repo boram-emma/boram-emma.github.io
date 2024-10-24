@@ -1,0 +1,11 @@
+
+# main links
+# https://jinhoooooou.github.io/making-blog/making-blog-7/
+
+main:
+  - tilte: "Home"
+    url: https://boram-emma.github.io
+  - title: "About"
+    url: /about/
+  - title: "Making blog"
+    url: /MakingBlog/
