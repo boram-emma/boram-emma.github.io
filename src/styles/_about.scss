@@ -7,6 +7,27 @@
   }
 }
 
+/* boram add : avatart*/
+.avatar {
+  width: 200px; /* 크기를 반으로 줄임 */
+  height: 200px; /* 크기를 반으로 줄임 */
+  border-radius: 50%; /* 동그랗게 만들기 */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: lightblue;
+  margin: 20px auto;
+}
+
+.avatar img {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: top;
+  transform: scale(1.0)
+}
+
 .tech {
   margin: 10px;
 }
