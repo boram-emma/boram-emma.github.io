@@ -11,35 +11,6 @@ var browserSync = require('browser-sync');
 var jekyllCommand = (/^win/.test(process.platform)) ? 'jekyll.bat' : 'jekyll';
 
 /*
- * Build the Jekyll Site
- * runs a child process in node that runs the jekyll commands
- */
-gulp.task('jekyll-build', function (done) {
-	return cp.spawn(jekyllCommand, ['build'], {stdio: 'inherit'})
-		.on('close', done);
-});
-
-/*
- * Rebuild Jekyll & reload browserSync
- */
-gulp.task('jekyll-rebuild', gulp.series(['jekyll-build'], function (done) {
-	browserSync.reload();
-	done();
-}));
-
-/*
- * Build the jekyll site and launch browser-sync
- */
-gulp.task('browser-sync', gulp.series(['jekyll-build'], function(done) {
-	browserSync({
-		server: {
-			baseDir: '_site'
-		}
-	});
-	done()
-}));
-
-/*
 * Compile and minify sass
 */
 gulp.task('sass', function() {
@@ -49,6 +20,47 @@ gulp.task('sass', function() {
     .pipe(csso())
 		.pipe(gulp.dest('assets/css/'))
 });
+
+/*
+* Copy compiled CSS into _site (for browser-sync preview)
+*/
+gulp.task('copy-css-to-site', function () {
+  return gulp.src('assets/css/**/*.css')
+    .pipe(gulp.dest('_site/assets/css'));
+});
+
+/*
+ * Build the Jekyll Site
+ * runs a child process in node that runs the jekyll commands
+*/
+
+gulp.task('jekyll-build', function (done) {
+	return cp.spawn(jekyllCommand, ['build'], {stdio: 'inherit'})
+		.on('close', done);
+});
+
+
+/*
+ * Rebuild Jekyll & reload browserSync
+ */
+gulp.task('jekyll-rebuild', gulp.series(['sass', 'jekyll-build', 'copy-css-to-site'], function (done) {
+	browserSync.reload();
+	done();
+}));
+
+/*
+ * Build the jekyll site and launch browser-sync
+ */
+gulp.task('browser-sync', gulp.series(['sass', 'jekyll-build', 'copy-css-to-site'], function(done) {
+	browserSync({
+		server: {
+			baseDir: '_site'
+		}
+	});
+	done()
+}));
+
+
 
 /*
 * Compile fonts
