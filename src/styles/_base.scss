@@ -42,3 +42,28 @@ a img {
 sup, sub {
     line-height: 0;
 }
+
+.custom-icon {
+    color: #470e7b;
+}
+
+.resume-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.resume-button {
+  background-color: #800080;  // 원하는 색 (보라)
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #6a1b9a; // hover 시 더 진한 보라
+  }
+}
